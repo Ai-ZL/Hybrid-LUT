@@ -3,7 +3,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 from .common import *
 
-
 # HD
 class HDUnit(nn.Module):
     rot_dict = {'h': [0, 1, 2, 3], 'd': [0, 1, 2, 3]}
