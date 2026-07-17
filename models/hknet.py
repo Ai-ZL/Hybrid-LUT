@@ -6,7 +6,7 @@ import cv2
 
 
 class HKNet(nn.Module):
-    def __init__(self, msb='hs', lsb='hs', msb2='hdblrc', lsb2='hdblrc', msb3='hdbt', lsb3='l', nf=64, upscale=2, act=nn.GELU, pcm_flag=True, **kwargs):
+    def __init__(self, msb='hs', lsb='hs', msb2='hdblrc', lsb2='hdblrc', msb3='hdbl', lsb3='l', nf=64, upscale=2, act=nn.GELU, pcm_flag=True, **kwargs):
         super(HKNet, self).__init__()
         self.msb = msb
         self.lsb = lsb
@@ -25,8 +25,8 @@ class HKNet(nn.Module):
             self.pcm_avg_factor = PCM_comb_Module_4in.avg_factor
             for ktype in 'abc':
                 setattr(self, f'pcm_yuv_lut_{ktype}', self.pcm(ktype=ktype, nf=nf))
-        unit_dict = {'p': PUnit, 'hd': HDUnit, 'hs': HSUnit, 'hl': HLUnit, 'hdv': HDVUnit, 'hdb': HDBUnit, 'sdy': SDYUnit, 'hdbv': HDBVUnit, 'hdbl': HDBLUnit, 
-        'hdbt': HDBT2Unit, 'hdblrc':HDBLRC1Unit}
+        unit_dict = {'p': PUnit, 'hd': HDUnit, 'hs': HSUnit, 'hl': HLUnit, 'hdv': HDVUnit, 'hdb': HDBUnit, 'sdy': SDYUnit, 'hdbv': HDBVUnit, 
+        'hdbl': HDBL2Unit, 'hdblrc':HDBLRC1Unit}
 
         # msb
         msb_unit = unit_dict[msb]
