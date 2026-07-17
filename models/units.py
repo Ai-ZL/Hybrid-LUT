@@ -1220,21 +1220,21 @@ class PCM_comb_Module_4in(nn.Module):
     def __init__(self, ktype, nf=64):
         super(PCM_comb_Module_4in, self).__init__()
         self.ktype = ktype
-        # 第一层：YU通道对的1x2卷积
+        # First layer: 1x2 convolution of Y and U channel pairs
         self.conv1 = nn.Conv2d(1, nf, kernel_size=(1, 4), stride=1, padding=0)
         self.act = nn.GELU()
 
-        # 密集连接层（模仿DnLUT）
-        self.conv2 = self._make_dense_conv(nf, nf)  # 输入nf，输出nf+nf
-        self.conv3 = self._make_dense_conv(nf + nf, nf)  # 输入nf*2，输出nf*3
-        self.conv4 = self._make_dense_conv(nf * 3, nf)  # 输入nf*3，输出nf*4
-        self.conv5 = self._make_dense_conv(nf * 4, nf)  # 输入nf*4，输出nf*5
+        # Dense connection layer
+        self.conv2 = self._make_dense_conv(nf, nf)  # input nf，output nf+nf
+        self.conv3 = self._make_dense_conv(nf + nf, nf)  # input nf*2，output nf*3
+        self.conv4 = self._make_dense_conv(nf * 3, nf)  # input nf*3，output nf*4
+        self.conv5 = self._make_dense_conv(nf * 4, nf)  # input nf*4，output nf*5
 
-        # 最终输出层
-        self.conv6 = nn.Conv2d(nf * 5, 1, 1)  # 输入nf*5，输出1通道
+        # final output layer
+        self.conv6 = nn.Conv2d(nf * 5, 1, 1)  # input nf*5，output 1 channel
 
 
-        # 初始化
+        # initialization
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
                 nn.init.kaiming_normal_(m.weight)
@@ -1269,7 +1269,7 @@ class PCM_comb_Module_4in(nn.Module):
         return F.fold(x, ((H - P) * S, (W - P) * S), S, stride=S)  # B, nf, Hout, Wout
 
     def _make_dense_conv(self, in_channels, out_channels):
-        """创建密集连接层"""
+        """create dense connection layer"""
         return nn.Sequential(
             nn.Conv2d(in_channels, out_channels, 1),
             nn.ReLU()
@@ -1277,16 +1277,14 @@ class PCM_comb_Module_4in(nn.Module):
 
     def forward(self, x_in):
         """
-        yu_input: Y通道输入 [B, 2, H, W+1]
-        返回: 增强后的Y通道 [B, 1, H, W]
+        yu_input: Y channel input [B, 2, H, W+1]
+        return: Enhanced Y-channel [B, 1, H, W]
         """
         B, C, H, W = x_in.shape  # [B, 2, H, W+1]
         x_in = x_in * 2 - 1
 
-        # PCM处理（模仿DnLUT的密集连接结构）
         x = self.act(self.dconv_forward(x_in))  # [B, nf, H, W]
 
-        # 密集连接处理
         feat1 = self.conv2(x)  # [B, nf, H, W]
         x = torch.cat([x, feat1], dim=1)  # [B, nf*2, H, W]
 
@@ -1306,7 +1304,7 @@ class PCM_comb_Module_4in(nn.Module):
     def get_lut_input(self, input_tensor):
         """
         input_tensor: [N, 1, 4]
-        输出: [N, 2, 1, 2] —— 和 forward 的 dconv_forward 完全一致
+        output: [N, 2, 1, 2] —— same with dconv_forward in forward
         """
         N = input_tensor.shape[0]
         input_tensor_dil = torch.zeros((N, 3, 2, 2), dtype=input_tensor.dtype)#(2,2)
