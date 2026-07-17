@@ -13,7 +13,7 @@ import math
 from torch.utils.tensorboard import SummaryWriter
 
 from models import *
-from data_noise_y_pcm import Provider, SRBenchmark, ProviderDN_C, SIDD_VAL
+from data_y import Provider, SRBenchmark, ProviderDN_C, SIDD_VAL
 from utils import PSNR, seed_everything, _rgb2yuv
 
 
