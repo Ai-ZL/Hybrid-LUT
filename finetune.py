@@ -322,8 +322,8 @@ if __name__ == "__main__":
             msb_weights3.append(weight)
 
         model_G.append(
-            HKLUT(msb_weights, lsb_weights, msb=args.msb, lsb=args.lsb, upscale=args.upscale[stage], pcm_flag=pcm_flag, pcm_weights=pcm_weights,
-                      lut_weights=lut_weights, rot2_weights=rot2_weights, msb_weights2=msb_weights2, lsb_weights2=lsb_weights2, msb_weights3=msb_weights3).cuda())
+            HKLUT(msb_weights, lsb_weights, msb=args.msb, lsb=args.lsb, msb2=args.msb2, lsb2=args.lsb2, msb=args.msb3, lsb=args.lsb3, upscale=args.upscale[stage], pcm_flag=pcm_flag, 
+                  pcm_weights=pcm_weights, lut_weights=lut_weights, rot2_weights=rot2_weights, msb_weights2=msb_weights2, lsb_weights2=lsb_weights2, msb_weights3=msb_weights3).cuda())
 
 
     # Optimizers
