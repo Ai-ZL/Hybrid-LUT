@@ -17,9 +17,9 @@ def parse_args():
                         help="Checkpoint directory")
     parser.add_argument("--upscale", nargs='+', type=int, default=[2, 2],
                         help="upscaling factors")
-    parser.add_argument('--msb', type=str, default='hdb',
+    parser.add_argument('--msb', type=str, default='hs',
                         choices=['p', 'hl', 'hd', 'hdb', 'hdv', 'hdbv', 'hdbl', 'hdblrc', 'hs'])
-    parser.add_argument('--lsb', type=str, default='hdv',
+    parser.add_argument('--lsb', type=str, default='hs',
                         choices=['p', 'hl', 'hd', 'hdb', 'hdv', 'hdbv', 'hdbl', 'hdblrc', 'hs'])
     parser.add_argument('--msb2', type=str, default='hdblrc', choices=['p', 'hl', 'hd', 'hdb', 'hdv', 'hdbv', 'hdbl', 'hdblrc', 'hs'])
     parser.add_argument('--lsb2', type=str, default='hdblrc', choices=['p', 'hl', 'hd', 'hdb', 'hdv', 'hdbv', 'hdbl', 'hdblrc', 'hs'])
