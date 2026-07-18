@@ -24,9 +24,9 @@ def parse_args():
     parser = argparse.ArgumentParser("Training Setting")
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--n-workers", type=int,  default=8)
-    parser.add_argument("--train-dir", type=str, default='/home/harry/dataset/SR/DIV2K',
+    parser.add_argument("--train-dir", type=str, default='/dataset/SR/DIV2K',
                         help="Training images")
-    parser.add_argument("--val-dir", type=str, default='/home/harry/dataset/SR/benchmark',
+    parser.add_argument("--val-dir", type=str, default='/dataset/SR/benchmark',
                         help="Validation images")
     parser.add_argument("--i-display", type=int, default=500,
                         help="display info every N iteration")
@@ -42,14 +42,14 @@ def parse_args():
     parser.add_argument("--batch-size", type=int, default=16,
                         help="training batch size")
     parser.add_argument("--start-iter", type=int, default=0,
-                        help="Set 0 for from scratch, else will load saved params and trains further")
+                        help="Set 0 for from scratch, else will load saved params and train further")
     parser.add_argument("--train-iter", type=int, default=200000,
                         help="number of training iterations")
     parser.add_argument('--lr', type=float, default=5e-4, help="initial learning rate")
     parser.add_argument('--wd', type=float, default=0,  help='weight decay')
 
-    parser.add_argument('--msb', type=str, default='sdy', choices=['p', 'hl', 'hs', 'hd', 'sdy', 'hdv', 'hdb', 'hdbv', 'hdbl','hdblrc'])
-    parser.add_argument('--lsb', type=str, default='sdy', choices=['p', 'hl', 'hd', 'hs', 'sdy', 'hdv', 'hdb', 'hdbv', 'hdbl','hdblrc'])
+    parser.add_argument('--msb', type=str, default='hs', choices=['p', 'hl', 'hs', 'hd', 'sdy', 'hdv', 'hdb', 'hdbv', 'hdbl','hdblrc'])
+    parser.add_argument('--lsb', type=str, default='hs', choices=['p', 'hl', 'hd', 'hs', 'sdy', 'hdv', 'hdb', 'hdbv', 'hdbl','hdblrc'])
     parser.add_argument('--msb2', type=str, default='hdblrc', choices=['p', 'hl', 'hs', 'hd', 'sdy', 'hdv', 'hdb', 'hdbv', 'hdbl','hdblrc'])
     parser.add_argument('--lsb2', type=str, default='hdblrc', choices=['p', 'hl', 'hd', 'hs', 'sdy', 'hdv', 'hdb', 'hdbv', 'hdbl','hdblrc'])
     parser.add_argument('--msb3', type=str, default='hdbl', choices=['p', 'hl', 'hs', 'hd', 'sdy', 'hdv', 'hdb', 'hdbv', 'hdbl','hdblrc'])
