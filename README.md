@@ -11,12 +11,22 @@ scipy=1.10.1
 tqdm=4.65.0
 opencv-python=4.7.0.72
 ```
+
 ### Training
 ```
 python train_y.py
+```
+### Transfer to LUTs
+```
+python transfer.py
 ```
 
 ### Testing
 ```
 python test_y.py
+```
+
+### Finetune (for real-world dataset)
+```
+python finetune.py
 ```
