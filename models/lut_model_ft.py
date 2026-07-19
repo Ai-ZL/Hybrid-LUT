@@ -2,8 +2,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from utils import bit_plane_slicing, decode_bit_mask, round_func
-from .luts import HDLUT, HDVLUT, HDBLUT, HDBVLUT, HLLUT, HSLUT, \
-   PCMComb4inLUT, LLUT, HDBT2LUT, HDBLRC1LUT
+from .luts import HDLUT, HDVLUT, HDBLUT, HDBVLUT, HLLUT, HSLUTft, \
+   PCMComb4inLUTft, LLUTft, HDBT2LUTft, HDBLRC1LUTft
 import numpy as np
 
 
@@ -14,11 +14,11 @@ class LUT_Model_ft(nn.Module):
         self.upscale = upscale
         self.bit_mask = '11110000'
         self.msb_bits, self.lsb_bits, self.msb_step, self.lsb_step = decode_bit_mask(self.bit_mask)
-        unit_dict = {'hd': HDLUT, 'hl': HLLUT, 'hs': HSLUT, 'hdv': HDVLUT, 'hdb': HDBLUT, 'hdbv': HDBVLUT
-            ,'hdbl': HDBL2LUT, 'hdblrc': HDBLRC1LUT}
+        unit_dict = {'hd': HDLUT, 'hl': HLLUT, 'hs': HSLUTft, 'hdv': HDVLUT, 'hdb': HDBLUT, 'hdbv': HDBVLUT
+            ,'hdbl': HDBL2LUTft, 'hdblrc': HDBLRC1LUTft}
         self.pcm_flag = pcm_flag
         if self.pcm_flag == True:
-            self.pcm_lut = PCMComb4inLUT(*pcm_weights)
+            self.pcm_lut = PCMComb4inLUTft(*pcm_weights)
         # msb
         msb_lut = unit_dict[msb]
         # MSB
@@ -40,7 +40,7 @@ class LUT_Model_ft(nn.Module):
         msb_lut3 = unit_dict[msb3]
         self.msb_lut3 = msb_lut3(*msb_weights3, 2 ** self.msb_bits, upscale=upscale)
 
-        self.lsb_lut_rot2 = LLUT(rot2_weights, 2 ** self.lsb_bits, upscale=upscale)
+        self.lsb_lut_rot2 = LLUTft(rot2_weights, 2 ** self.lsb_bits, upscale=upscale)
 
         self.weight_lut_msb = nn.Parameter(
             lut_weights[0]
