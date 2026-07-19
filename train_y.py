@@ -106,7 +106,7 @@ if __name__ == "__main__":
     for s in args.upscale:
         if i!=0:
             pcm_flag=False
-        models.append(HKNet(msb=args.msb, lsb=args.lsb, msb2=args.msb2, lsb2=args.lsb2, msb3=args.msb3, lsb3=args.lsb3, nf=args.n_filters, upscale=s, act=args.act_fn, pcm_flag=pcm_flag).to(device))
+        models.append(NET_MODEL(msb=args.msb, lsb=args.lsb, msb2=args.msb2, lsb2=args.lsb2, msb3=args.msb3, lsb3=args.lsb3, nf=args.n_filters, upscale=s, act=args.act_fn, pcm_flag=pcm_flag).to(device))
         i+=1
 
     if torch.cuda.device_count() > 1:
