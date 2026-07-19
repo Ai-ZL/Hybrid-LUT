@@ -30,3 +30,6 @@ python test_y.py
 ```
 python finetune.py
 ```
+
+## Acknowledgement
+Our code is based upon [HKLUT](https://github.com/jasonli0707/hklut) and [DnLUT](https://github.com/Stephen0808/DnLUT). Thanks for these awesome codes!
