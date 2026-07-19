@@ -11,3 +11,12 @@ scipy=1.10.1
 tqdm=4.65.0
 opencv-python=4.7.0.72
 ```
+### Training
+```
+python train_y.py
+```
+
+### Testing
+```
+python test_y.py
+```
