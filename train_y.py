@@ -35,7 +35,7 @@ def parse_args():
     parser.add_argument("--i-save", type=int, default=5000,
                         help="save checkpoints every N iteration")
 
-    parser.add_argument("--upscale", nargs='+', type=int, default=[2, 2],
+    parser.add_argument("--upscale", nargs='+', type=int, default=[1, 1],
                         help="upscaling factors")
     parser.add_argument("--crop-size", type=int, default=48,
                         help="input LR training patch size")
