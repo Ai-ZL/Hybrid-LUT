@@ -689,9 +689,8 @@ class HDBVLUT(nn.Module):
 class PCMComb4inLUT(nn.Module):
     def __init__(self, a_weight, b_weight, c_weight, interval=4):
         """
-        PCM LUT推理模块
-        lut_path: PCM LUT文件路径
-        interval: 采样间隔，与生成LUT时一致
+        PCM LUT Inference Module
+        interval: The sampling interval is the same as when generating the LUT.
         """
         super(PCMComb4inLUT, self).__init__()
         self.a_weight = a_weight
@@ -701,12 +700,12 @@ class PCMComb4inLUT(nn.Module):
         self.pad_dict = (0, 1, 0, 1)
         self.avg_factor = 3.
         self.interval = interval
-        self.L = 2 ** (8 - interval) + 1  # 每个维度的采样点数
+        self.L = 2 ** (8 - interval) + 1  # Number of sampling points for each dimension
 
     def forward(self, img_in):
         """
-        三维单纯形插值 - 适配PCM的YU输入格式
-        img_in: [B, 3, H, W] 的YU输入
+        3D Simplex Interpolation - YU/YV/UV Input Format Adapted for PCM
+        img_in: [B, 3, H, W] 
         """
 
         out_all = 0.
@@ -762,7 +761,7 @@ class PCMComb4inLUT(nn.Module):
                 img_c2 = img_c1 + 1
                 img_d2 = img_d1 + 1
 
-                # 计算16个顶点的LUT值
+                # Calculate the LUT value for 16 vertices
                 L = self.L
                 p0000 = weight[img_a1.flatten().astype(np.int_) * L * L * L + img_b1.flatten().astype(
                     np.int_) * L * L + img_c1.flatten().astype(np.int_) * L + img_d1.flatten().astype(np.int_)].reshape(
@@ -988,7 +987,7 @@ class PCMComb4inLUT(nn.Module):
                 out = np.transpose(out, (0, 1, 3, 2, 4)).reshape(
                     (img_a1.shape[0], img_a1.shape[1] * upscale, img_a1.shape[2] * upscale))
 
-                # 归一化到[-1,1]范围
+                # Normalized to [-1, 1]
                 # out = out.astype(np.float32) / q / 127.0
                 out = out / q
                 out = torch.from_numpy(out).to(device)
@@ -1005,9 +1004,8 @@ class PCMComb4inLUT(nn.Module):
 class PCMComb4inLUTft(nn.Module):
     def __init__(self, a_weight, b_weight, c_weight, interval=4):
         """
-        PCM LUT推理模块
-        lut_path: PCM LUT文件路径
-        interval: 采样间隔，与生成LUT时一致
+        PCM LUT Inference Module
+        interval: The sampling interval is the same as when generating the LUT.
         """
         super(PCMComb4inLUTft, self).__init__()
         self.a_weight = nn.Parameter(
@@ -1023,12 +1021,12 @@ class PCMComb4inLUTft(nn.Module):
         self.pad_dict = (0, 1, 0, 1)
         self.avg_factor = 3.
         self.interval = interval
-        self.L = 2 ** (8 - interval) + 1  # 每个维度的采样点数
+        self.L = 2 ** (8 - interval) + 1  # Number of sampling points for each dimension
 
     def forward(self, img_in):
         """
-        三维单纯形插值 - 适配PCM的YU输入格式
-        img_in: [B, 3, H, W] 的YU输入
+        3D Simplex Interpolation - YU/YV/UV Input Format Adapted for PCM
+        img_in: [B, 3, H, W] 
         """
 
         out_all = 0.
@@ -1095,7 +1093,7 @@ class PCMComb4inLUTft(nn.Module):
                 img_c2 = img_c1 + 1
                 img_d2 = img_d1 + 1
 
-                # 计算16个顶点的LUT值
+                # Calculate the LUT value for 16 vertices
                 L = self.L
                 p0000 = weight[img_a1.flatten() * L * L * L + img_b1.flatten() * L * L + img_c1.flatten() * L + img_d1.flatten()].reshape(
                     (img_a1.shape[0], img_a1.shape[1], img_a1.shape[2], img_a1.shape[3], upscale, upscale))
@@ -1257,7 +1255,7 @@ class PCMComb4inLUTft(nn.Module):
                 out = out.permute(0, 1, 2, 4, 3, 5).reshape(
                     (img_a1.shape[0], img_a1.shape[1], img_a1.shape[2] * upscale, img_a1.shape[3] * upscale))
 
-                # 归一化到[-1,1]范围
+                # Normalized to [-1, 1]
                 # out = out.astype(np.float32) / q / 127.0
                 out = out / q
                 #out = out.unsqueeze(0)
