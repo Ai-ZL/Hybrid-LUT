@@ -101,7 +101,7 @@ if __name__ == "__main__":
             pcm_flag=True
         else:
             pcm_flag=False
-        model = HKNet(msb=args.msb, lsb=args.lsb, msb2=args.msb2, lsb2=args.lsb2, msb3=args.msb3, lsb3=args.lsb3, nf=args.n_filters, upscale=s, act=args.act_fn, pcm_flag=pcm_flag).to(device)
+        model = NET_MODEL(msb=args.msb, lsb=args.lsb, msb2=args.msb2, lsb2=args.lsb2, msb3=args.msb3, lsb3=args.lsb3, nf=args.n_filters, upscale=s, act=args.act_fn, pcm_flag=pcm_flag).to(device)
         ckpt = torch.load(f'{args.ckpt_dir}/{args.exp_name}/model_G_S{i}_best.pth')
         model.load_state_dict(ckpt, strict=True)
         models.append(model)
