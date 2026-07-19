@@ -5,9 +5,9 @@ from utils import bit_plane_slicing, floor_func, round_func, _yuv2rgb
 import cv2
 
 
-class HKNet(nn.Module):
+class NET_MODEL(nn.Module):
     def __init__(self, msb='hs', lsb='hs', msb2='hdblrc', lsb2='hdblrc', msb3='hdbl', lsb3='l', nf=64, upscale=2, act=nn.GELU, pcm_flag=True, **kwargs):
-        super(HKNet, self).__init__()
+        super(NET_MODEL, self).__init__()
         self.msb = msb
         self.lsb = lsb
         self.msb2 = msb2
