@@ -56,7 +56,7 @@ def parse_args():
     parser.add_argument('--lsb3', type=str, default='l', choices=['l','p', 'hl', 'hd', 'hs', 'sdy', 'hdv', 'hdb', 'hdbv', 'hdbl','hdblrc'])
     parser.add_argument('--act-fn', type=str, default='relu', choices=['relu', 'gelu', 'leakyrelu', 'starrelu'])
     parser.add_argument('--n-filters', type=int, default=64, help="number of filters in intermediate layers")
-    parser.add_argument('--noise', type=int, default=15, help="default noise level:15, 25, 50")
+    parser.add_argument('--noise', type=int, default=15, help="default noise level: 0, 15, 25, 50")
     args = parser.parse_args()
 
     factors = 'x'.join([str(s) for s in args.upscale])
