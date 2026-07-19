@@ -7,10 +7,10 @@ from .luts import HDLUT, HDVLUT, HDBLUT, HDBVLUT, HLLUT, HSLUT, \
 import numpy as np
 
 
-class HKLUT(nn.Module):
+class LUT_Model_ft(nn.Module):
     def __init__(self, msb_weights, lsb_weights, msb='hs', lsb='hs', msb2='hdblrc', lsb2='hdblrc', msb3='hdbl', lsb3='l', upscale=2, pcm_flag=True, pcm_weights=None,
                  lut_weights=None, rot2_weights=None, msb_weights2=None, lsb_weights2=None, msb_weights3=None):
-        super(HKLUT, self).__init__()
+        super(LUT_Model_ft, self).__init__()
         self.upscale = upscale
         self.bit_mask = '11110000'
         self.msb_bits, self.lsb_bits, self.msb_step, self.lsb_step = decode_bit_mask(self.bit_mask)
