@@ -1,6 +1,6 @@
 # Hybrid-LUT
 [ECCV 2026] Hybrid-LUT: Channel-Aware Hybrid Lookup Table and Filtering for Efficient Image Denoising
-
+:star: If ICELUT is helpful to your images or projects, please help star this repo. Thanks! :hugs: 
 ## Usage
 ### Dependency
 ```
