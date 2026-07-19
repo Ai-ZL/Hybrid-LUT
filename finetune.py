@@ -74,7 +74,7 @@ def save_luts(model_G, args, n_stages):
         
         if stage==0:
             for ktype in 'abc':
-                lut_path_pcm = f'luts/{args.exp_name}/LUT_ft_S{stage}_YUV_LUT_{ktype.upper()}_x{args.upscale[stage]}_8bit_int8.npy'
+                lut_path_pcm = f'luts/{args.exp_name}/S{stage}_PCM_YUV_LUT_{ktype.upper()}_x{args.upscale[stage]}_8bit_int8.npy'
                 
                 # get pcm_lut
                 pcm_lut_obj = getattr(model_G[stage], 'pcm_lut')
@@ -87,7 +87,7 @@ def save_luts(model_G, args, n_stages):
                 np.save(lut_path_pcm, lut_weight)
                 #print(f"Stage {stage} {ktype}_weight - LUT size: {lut_weight.shape}, Saved to {lut_path_pcm}")
         
-        lut_path_msb = f'luts/{args.exp_name}/LUT_ft_S{stage}_weight_lut_msb.npy'
+        lut_path_msb = f'luts/{args.exp_name}/S{stage}_weight_lut_msb.npy'
             
         # get pcm_lut_msb
         pcm_lut_msb = getattr(model_G[stage], "weight_lut_msb")
@@ -96,7 +96,7 @@ def save_luts(model_G, args, n_stages):
         np.save(lut_path_msb, lut_weight)
         #print(f"Stage {stage} weight_lut_msb - LUT size: {lut_weight.shape}, Saved to {lut_path_msb}")
 
-        lut_path_lsb = f'luts/{args.exp_name}/LUT_ft_S{stage}_weight_lut_lsb.npy'
+        lut_path_lsb = f'luts/{args.exp_name}/S{stage}_weight_lut_lsb.npy'
             
         # get pcm_lut_lsb
         pcm_lut_lsb = getattr(model_G[stage], "weight_lut_lsb")
@@ -107,7 +107,7 @@ def save_luts(model_G, args, n_stages):
 
         
         for ktype in args.msb:
-            lut_path_msb = f'luts/{args.exp_name}/LUT_ft_S{stage}_MSB_{args.msb.upper()}_LUT_{ktype.upper()}_x{args.upscale[stage]}_4bit_int8.npy'
+            lut_path_msb = f'luts/{args.exp_name}/S{stage}_MSB_{args.msb.upper()}_LUT_{ktype.upper()}_x{args.upscale[stage]}_4bit_int8.npy'
             
             # get msb_lut
             pcm_lut_obj = getattr(model_G[stage], 'msb_lut')
@@ -120,7 +120,7 @@ def save_luts(model_G, args, n_stages):
             np.save(lut_path_msb, lut_weight)
             #print(f"Stage {stage} {ktype}_weight - LUT size: {lut_weight.shape}, Saved to {lut_path_msb}")
 
-            lut_path_lsb = f'luts/{args.exp_name}/LUT_ft_S{stage}_LSB_{args.msb.upper()}_LUT_{ktype.upper()}_x{args.upscale[stage]}_4bit_int8.npy'
+            lut_path_lsb = f'luts/{args.exp_name}/S{stage}_LSB_{args.msb.upper()}_LUT_{ktype.upper()}_x{args.upscale[stage]}_4bit_int8.npy'
             
             # get lsb_lut
             pcm_lut_obj = getattr(model_G[stage], 'lsb_lut')
@@ -133,7 +133,7 @@ def save_luts(model_G, args, n_stages):
             #print(f"Stage {stage} {ktype}_weight - LUT size: {lut_weight.shape}, Saved to {lut_path_lsb}")
         
         for ktype in args.msb2:
-            lut_path_msb = f'luts/{args.exp_name}/LUT_ft_S{stage}_MSB_HDBLRC_LUT_{ktype.upper()}_x{args.upscale[stage]}_4bit_int8.npy'
+            lut_path_msb = f'luts/{args.exp_name}/S{stage}_MSB_{args.msb2.upper()}_LUT_{ktype.upper()}_x{args.upscale[stage]}_4bit_int8.npy'
             
             # get msb_lut2
             pcm_lut_obj = getattr(model_G[stage], 'msb_lut2')
@@ -146,7 +146,7 @@ def save_luts(model_G, args, n_stages):
             np.save(lut_path_msb, lut_weight)
             #print(f"Stage {stage} {ktype}_weight - LUT size: {lut_weight.shape}, Saved to {lut_path_msb}")
 
-            lut_path_lsb = f'luts/{args.exp_name}/LUT_ft_S{stage}_LSB_HDBLRC_LUT_{ktype.upper()}_x{args.upscale[stage]}_4bit_int8.npy'
+            lut_path_lsb = f'luts/{args.exp_name}/S{stage}_LSB_{args.lsb2.upper()}_LUT_{ktype.upper()}_x{args.upscale[stage]}_4bit_int8.npy'
             
             # get lsb_lut2
             pcm_lut_obj = getattr(model_G[stage], 'lsb_lut2')
@@ -159,7 +159,7 @@ def save_luts(model_G, args, n_stages):
             #print(f"Stage {stage} {ktype}_weight - LUT size: {lut_weight.shape}, Saved to {lut_path_lsb}")
         
         for ktype in args.msb3:
-            lut_path_msb = f'luts/{args.exp_name}/LUT_ft_S{stage}_MSB_HDBT_LUT_{ktype.upper()}_x{args.upscale[stage]}_4bit_int8.npy'
+            lut_path_msb = f'luts/{args.exp_name}/S{stage}_MSB_{args.msb3.upper()}_LUT_{ktype.upper()}_x{args.upscale[stage]}_4bit_int8.npy'
             
             # get msb_lut3
             pcm_lut_obj = getattr(model_G[stage], 'msb_lut3')
@@ -172,7 +172,7 @@ def save_luts(model_G, args, n_stages):
             np.save(lut_path_msb, lut_weight)
             #print(f"Stage {stage} {ktype}_weight - LUT size: {lut_weight.shape}, Saved to {lut_path_msb}")
         
-        lut_path_lsb = f'luts/{args.exp_name}/LUT_ft_S{stage}_LSB_2ROT_x{args.upscale[stage]}_4bit_int8.npy'
+        lut_path_lsb = f'luts/{args.exp_name}/S{stage}_LSB_2ROT_x{args.upscale[stage]}_4bit_int8.npy'
             
         
         pcm_lut_obj = getattr(model_G[stage], 'lsb_lut_rot2')
